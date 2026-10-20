@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | Damien.com</title>
+<style>/* ===== 1. COLORS & SETTINGS — change the whole theme here ===== */
+:root{
+  --bg:#030D19; --bg-2:#061321; --panel:#0A1B2D;
+  --border:#24445F; --metal:#5D83A7; --highlight:#A9C9E5;
+  --text:#E7EFF8; --text-2:#8FA4B9;
+  --glow:0 0 24px rgba(93,131,167,.35);
+  --font:"Rajdhani","Segoe UI",system-ui,sans-serif;
+  --header-h:64px; --max:1180px;
+  /* set from script.js (SITE_CONFIG.hero) */
+  --banner-image:none; --banner-height:88vh; --banner-position:center center; --overlay:.55;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--header-h)}
+body{background:radial-gradient(ellipse at 50% 0,var(--bg-2),var(--bg) 70%) fixed;color:var(--text);font-family:var(--font);font-size:18px;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--highlight);outline-offset:3px}
+#particles{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;user-select:none}
+main,.site-header,.site-footer{position:relative;z-index:1}
+
+/* ===== 2. HEADER ===== */
+.site-header{position:sticky;top:0;z-index:50;height:var(--header-h);display:flex;align-items:center;gap:24px;padding:0 24px;background:rgba(3,13,25,.72);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;letter-spacing:.12em;font-weight:600}
+.logo-slot{width:36px;height:36px;filter:drop-shadow(0 0 6px rgba(93,131,167,.6))}
+nav{display:flex;gap:4px;margin-left:auto}
+nav a{position:relative;padding:8px 16px;text-decoration:none;letter-spacing:.2em;font-size:.8rem;color:var(--text-2);border:1px solid transparent;transition:.25s}
+nav a:hover,nav a[aria-current]{color:var(--text);border-color:var(--border);background:rgba(36,68,95,.25)}
+nav a[aria-current]::after{content:"";position:absolute;left:20%;right:20%;bottom:-1px;height:2px;background:var(--highlight);box-shadow:0 0 8px var(--highlight)}
+.status{font-size:.7rem;letter-spacing:.2em;color:var(--text-2);display:flex;align-items:center;gap:8px}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--highlight);box-shadow:0 0 8px var(--highlight);animation:pulse 2.4s infinite}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--border);padding:10px;cursor:pointer}
+.menu-btn span{display:block;width:20px;height:2px;background:var(--highlight);margin:4px 0}
+
+/* ===== 3. IMAGE SLOTS (with fallback when an image is missing) ===== */
+.img-slot{position:relative;overflow:hidden}
+.img-slot img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center)}
+.img-slot.missing{background:linear-gradient(135deg,var(--panel),var(--bg-2));border:1px dashed var(--border)}
+.img-slot.missing::after{content:"IMAGE";position:absolute;inset:0;display:grid;place-items:center;font-size:.7rem;letter-spacing:.3em;color:var(--metal)}
+.logo-slot.missing::after,.hero-emblem.missing::after{content:"D"; font-size:1rem}
+
+/* ===== 4. HERO ===== */
+.hero{position:relative;min-height:var(--banner-height);display:grid;place-items:center;text-align:center;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero.left{text-align:left;place-items:center start}
+.hero-bg{position:absolute;inset:0;background:var(--banner-image) var(--banner-position)/cover no-repeat}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,13,25,var(--overlay)),var(--bg))}
+.hero-inner{position:relative;max-width:820px;padding:64px 24px}
+.hero.left .hero-inner{margin-left:max(24px,calc((100vw - var(--max))/2))}
+.hero-emblem{width:128px;height:128px;margin:0 auto 24px;border-radius:50%;filter:drop-shadow(0 0 28px rgba(93,131,167,.55))}
+.hero.left .hero-emblem{margin-left:0}
+.sys-label{font-size:.75rem;letter-spacing:.4em;color:var(--metal)}
+h1{font-size:clamp(2rem,6vw,4rem);letter-spacing:.14em;font-weight:600;line-height:1.1;margin:12px 0;text-shadow:0 0 30px rgba(93,131,167,.4)}
+h2{font-size:clamp(.85rem,2vw,1.1rem);letter-spacing:.28em;font-weight:500;color:var(--highlight)}
+.hero-inner>p:not(.sys-label){color:var(--text-2);margin:20px auto 32px;max-width:56ch}
+.hero.left .hero-inner>p{margin-left:0}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.hero.left .btn-row{justify-content:flex-start}
+.btn{display:inline-block;padding:12px 28px;border:1px solid var(--metal);text-decoration:none;font-size:.8rem;letter-spacing:.25em;transition:.25s;background:rgba(10,27,45,.6)}
+.btn:hover{background:var(--metal);color:var(--bg);box-shadow:var(--glow)}
+.btn.primary{background:linear-gradient(var(--border),var(--panel));border-color:var(--highlight)}
+
+/* ===== 5. SECTIONS, DIVIDER, PANELS ===== */
+.wrap{max-width:var(--max);margin:0 auto;padding:72px 24px 8px}
+.sys-divider{display:flex;align-items:center;gap:16px;margin-bottom:36px}
+.sys-divider::before,.sys-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border))}
+.sys-divider::after{transform:scaleX(-1)}
+.sys-divider span{border:1px solid var(--metal);padding:8px 40px;letter-spacing:.35em;font-size:.8rem;background:rgba(10,27,45,.6)}
+.no-dividers .sys-divider::before,.no-dividers .sys-divider::after{display:none}
+.panel,.card{background:linear-gradient(160deg,rgba(10,27,45,.85),rgba(6,19,33,.85));border:1px solid var(--border);position:relative;overflow:hidden}
+.panel::before,.card::before{content:"";position:absolute;top:-1px;left:-1px;width:18px;height:18px;border-top:2px solid var(--metal);border-left:2px solid var(--metal)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px);border-color:var(--metal);box-shadow:var(--glow)}
+.card .img-slot{aspect-ratio:16/10;border-bottom:1px solid var(--border)}
+.card-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-label{font-size:.7rem;letter-spacing:.25em;color:var(--metal)}
+.card h3{font-size:1.4rem;letter-spacing:.14em;font-weight:600}
+.card p{color:var(--text-2);flex:1}
+.card .btn{align-self:flex-start;margin-top:8px}
+.scan::after,.card:hover::after{content:"";position:absolute;left:0;right:0;height:40px;top:-40px;background:linear-gradient(transparent,rgba(169,201,229,.07),transparent);animation:scan 5s linear infinite;pointer-events:none}
+.about{display:grid;grid-template-columns:minmax(200px,320px) 1fr;gap:32px;padding:28px}
+.about .img-slot{aspect-ratio:1;border:1px solid var(--border)}
+.about h3,.contact h3{letter-spacing:.14em;font-size:1.6rem;margin-bottom:10px}
+.about p,.contact p{color:var(--text-2);margin-bottom:12px}
+.details{list-style:none;padding:0;display:grid;gap:4px;font-size:.95rem}
+.details b{color:var(--metal);letter-spacing:.2em;font-size:.75rem;margin-right:10px}
+.contact{padding:36px;text-align:center}
+.socials{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.socials a{border:1px solid var(--border);padding:6px 16px;text-decoration:none;font-size:.75rem;letter-spacing:.2em;color:var(--text-2);transition:.25s}
+.socials a:hover{border-color:var(--highlight);color:var(--text)}
+.site-footer{margin-top:80px;padding:40px 24px;border-top:1px solid var(--border);text-align:center;background:rgba(3,13,25,.7)}
+.site-footer .brand{justify-content:center}
+.site-footer p{color:var(--text-2);font-size:.85rem;margin-top:10px}
+.eot{letter-spacing:.4em;font-size:.65rem!important;color:var(--metal)!important}
+
+/* ===== 6. ANIMATION ===== */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+.hero-inner{animation:rise 1s both}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+@keyframes pulse{50%{opacity:.35}}
+@keyframes scan{to{top:100%}}
+.no-anim *,.no-anim *::before,.no-anim *::after{animation:none!important;transition:none!important}
+.no-anim .reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== 7. RESPONSIVE ===== */
+@media (max-width:980px){.cards{grid-template-columns:repeat(2,1fr)}.status{display:none}}
+@media (max-width:760px){
+  .menu-btn{display:block}
+  nav{position:absolute;top:var(--header-h);left:0;right:0;flex-direction:column;background:rgba(3,13,25,.96);border-bottom:1px solid var(--border);display:none;padding:8px}
+  nav.open{display:flex}
+  .cards,.about{grid-template-columns:1fr}
+  .hero{min-height:calc(var(--banner-height) * .85)}
+}
+
+
+.hero.page-hero{min-height:42vh}</style>
+</head>
+<body>
+<canvas id="particles" aria-hidden="true"></canvas>
+<header class="site-header">
+  <a class="brand" href="#" id="homeLink"><span class="img-slot logo-slot" id="brandLogo"></span><span id="brandName"></span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <nav id="mainNav" aria-label="Main"></nav>
+  <div class="status"><i></i>SYSTEM ONLINE</div>
+</header>
+<main>
+  <section class="hero page-hero">
+    <div class="hero-bg"></div><div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <p class="sys-label">MODULE_01 // PROFILE</p>
+      <h1 id="pTitle"></h1><p id="pIntro"></p>
+      <div class="btn-row"><a class="btn" id="backBtn" href="#">&larr; BACK TO HOME</a></div>
+    </div>
+  </section>
+  <section class="wrap">
+    <div class="sys-divider reveal"><span>PERSONAL DATABASE</span></div>
+    <div class="about panel reveal" id="aboutBox"></div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="brand"><span class="img-slot logo-slot" id="footLogo"></span><span id="footName"></span></div>
+  <p id="footText"></p><p class="eot">END OF TRANSMISSION</p>
+</footer>
+<script>
+/* =====================  EDIT THIS SECTION  ===================== */
+const PAGE = {
+  homePage: "index.html",   // every home button goes here (change if you rename your main page)
+  siteName: "Damien.com",
+  logo: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB4bWxuczpjMnBhPSJodHRwOi8vYzJwYS5vcmcvbWFuaWZlc3QiPjxtZXRhZGF0YT48YzJwYTptYW5pZmVzdD5BQUFXZ21wMWJXSUFBQUFlYW5WdFpHTXljR0VBRVFBUWdBQUFxZ0E0bTNFRFl6SndZUUFBQUJaY2FuVnRZZ0FBQUVkcWRXMWtZekp0WVFBUkFCQ0FBQUNxQURpYmNRTjFjbTQ2WXpKd1lUcGpPRGs0TURFd05DMHhPR1l6TFRRek9ERXRZakE1WmkwNU1ESXpOREE1TkdOaVltRUFBQUFEbDJwMWJXSUFBQUFwYW5WdFpHTXlZWE1BRVFBUWdBQUFxZ0E0bTNFRFl6SndZUzVoYzNObGNuUnBiMjV6QUFBQUFMeHFkVzFpQUFBQVJHcDFiV1JqWW05eUFCRUFFSUFBQUtvQU9KdHhFMk15Y0dFdWFXNW5jbVZrYVdWdWRDNTJNd0FBQUFBWVl6SnphTlBLb2U4Zkw3OGNDZ3M1SWw4K2Vwd0FBQUJ3WTJKdmNxTnBaR002Wm05eWJXRjBiV2x0WVdkbEwzTjJaeXQ0Yld4cWFXNXpkR0Z1WTJWSlJIZ3NlRzF3T21scFpEbzJPVGhoTlRZM055MHhOV1V5TFRSalpEZ3RZVFl5T0MxbE1tRmlPRGN5TmpBek5UTnNjbVZzWVhScGIyNXphR2x3YUhCaGNtVnVkRTltQUFBQjRtcDFiV0lBQUFCQmFuVnRaR05pYjNJQUVRQVFnQUFBcWdBNG0zRVRZekp3WVM1aFkzUnBiMjV6TG5ZeUFBQUFBQmhqTW5ObzI3aXdON2Z3OGh6SHY0b2orU2p4bGdBQUFabGpZbTl5b21kaFkzUnBiMjV6Z3FKbVlXTjBhVzl1YTJNeWNHRXViM0JsYm1Wa2FuQmhjbUZ0WlhSbGNuT2hhMmx1WjNKbFpHbGxiblJ6Z2FKamRYSnNlQzF6Wld4bUkycDFiV0ptUFdNeWNHRXVZWE56WlhKMGFXOXVjeTlqTW5CaExtbHVaM0psWkdsbGJuUXVkak5rYUdGemFGZ2dMdWljK3N6bjlnYlJiQ3dlQTN2VDhSZ3VybWlLWDlOcnQ0T1p3OWl5RFhPa1ptRmpkR2x2Ym5nZFkyOXRMbUZ1ZEdoeWIzQnBZeTVqYkdGMVpHVXVjSEp2ZG1sa1pXUnFjR0Z5WVcxbGRHVnljNkY0SDJOdmJTNWhiblJvY205d2FXTXViM0pwWjJsdUxXTnZibVpwWkdWdVkyVm5kVzVyYm05M2JtdGtaWE5qY21sd2RHbHZibmhtUTJ4aGRXUmxJSEJ5YjNacFpHVmtJSFJvYVhNZ1ptbHNaU0JoZENCMGFHVWdjbVZ4ZFdWemRDQnZaaUJoSUhWelpYSWdZVzVrSUcxaGVTQm9ZWFpsSUdOeVpXRjBaV1FnYjNJZ2JXOWthV1pwWldRZ2RHaGxJR1pwYkdVZ1kyOXVkR1Z1ZEhNdWJYTnZablIzWVhKbFFXZGxiblNoWkc1aGJXVm1RMnhoZFdSbGNtRnNiRUZqZEdsdmJuTkpibU5zZFdSbFpQVUFBQURJYW5WdFlnQUFBRUJxZFcxa1kySnZjZ0FSQUJDQUFBQ3FBRGliY1JOak1uQmhMbWhoYzJndVpHRjBZUUFBQUFBWVl6SnphTDZmODgrUDFrZ0RZMUtRb1dCVkdiZ0FBQUNBWTJKdmNxVmpZV3huWm5Ob1lUSTFObU53WVdSTkFBQUFBQUFBQUFBQUFBQUFBR1JvWVhOb1dDRG5EVmdKYnpZbFFJS3JTWFBXdVg0WWIvZ3pNZXdNNmFxdVJtN2xIc3Blb21SdVlXMWxibXAxYldKbUlHMWhibWxtWlhOMGFtVjRZMngxYzJsdmJuT0JvbVZ6ZEdGeWRCaDlabXhsYm1kMGFCa2VCQUFBQWo1cWRXMWlBQUFBSjJwMWJXUmpNbU5zQUJFQUVJQUFBS29BT0p0eEEyTXljR0V1WTJ4aGFXMHVkaklBQUFBQ0QyTmliM0tsWTJGc1oyWnphR0V5TlRacGMybG5ibUYwZFhKbGVFMXpaV3htSTJwMWJXSm1QUzlqTW5CaEwzVnlianBqTW5CaE9tTTRPVGd3TVRBMExURTRaak10TkRNNE1TMWlNRGxtTFRrd01qTTBNRGswWTJKaVlTOWpNbkJoTG5OcFoyNWhkSFZ5WldwcGJuTjBZVzVqWlVsRWVDeDRiWEE2YVdsa09qWTFZV014WWpZeExUVXpPREV0TkdJNU9DMWhOalF5TFdWaU1qbGxORFUyT0daaVpYSmpjbVZoZEdWa1gyRnpjMlZ5ZEdsdmJuT0RvbU4xY214NExYTmxiR1lqYW5WdFltWTlZekp3WVM1aGMzTmxjblJwYjI1ekwyTXljR0V1YVc1bmNtVmthV1Z1ZEM1Mk0yUm9ZWE5vV0NBdTZKejZ6T2YyQnRGc0xCNERlOVB4R0M2dWFJcGYwMnUzZzVuRDJMSU5jNkpqZFhKc2VDcHpaV3htSTJwMWJXSm1QV015Y0dFdVlYTnpaWEowYVc5dWN5OWpNbkJoTG1GamRHbHZibk11ZGpKa2FHRnphRmdncS9pMVQzcVQ1T0FZcG0xMnVKK21BU045U1BWWDJXOE1ETGVMTVVkL21LR2lZM1Z5YkhncGMyVnNaaU5xZFcxaVpqMWpNbkJoTG1GemMyVnlkR2x2Ym5Ndll6SndZUzVvWVhOb0xtUmhkR0ZrYUdGemFGZ2dERndXeUVaazFuelN0TzZUYkpJQzk3di9qV2QwK0VoLzdScURobEpIUFFaMFkyeGhhVzFmWjJWdVpYSmhkRzl5WDJsdVptK2paRzVoYldWdlFXNTBhSEp2Y0dsaklFWnBiR1Z6WjNabGNuTnBiMjVsTVM0d0xqQnJjM0JsWTFabGNuTnBiMjVsTWk0MExqQUFBQkE0YW5WdFlnQUFBQ2hxZFcxa1l6Smpjd0FSQUJDQUFBQ3FBRGliY1FOak1uQmhMbk5wWjI1aGRIVnlaUUFBQUJBSVkySnZjdEtFV1FJU29nRW1HQ0ZaQWdvd2dnSUdNSUlCamFBREFnRUNBaFJBNWFBSzdzSTUwTDY0Zy9vR1FnVTlaMVVUQURBS0JnZ3Foa2pPUFFRREF6QkpNUmN3RlFZRFZRUUtFdzVCYm5Sb2NtOXdhV01zSUZCQ1F6RXVNQ3dHQTFVRUF4TWxRVzUwYUhKdmNHbGpJRU52Ym5SbGJuUWdRM0psWkdWdWRHbGhiSE1nVW05dmRDQkRRVEFlRncweU5qQTRNRGN4T0RRek5UWmFGdzB5T0RBNE1EWXhPVFF6TlRaYU1FUXhGekFWQmdOVkJBb1REa0Z1ZEdoeWIzQnBZeXdnVUVKRE1Ta3dKd1lEVlFRREV5QkJiblJvY205d2FXTWdRMnhoZFdSbElFTnZiblJsYm5RZ1UybG5ibWx1WnpCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpoNkNtdkxVQmdGRk5VMHZVS2xPVnRFNmRqZDE3TDVTdXdYMExlbUZpc0JNM2RrZC8zY3lqeEZBM1FvNVM0NmZYMC9paFkwVlo3bWZiOUtGNzAzdDVPaldEQldNQTRHQTFVZER3RUIvd1FFQXdJSGdEQVZCZ05WSFNVRURqQU1CZ29yQmdFRUFZUG9YZ0lCTUF3R0ExVWRFd0VCL3dRQ01BQXdId1lEVlIwakJCZ3dGb0FVemxIaUJJRk9aRnNqK09QRXo1bytuTUhYWE1Jd0NnWUlLb1pJemowRUF3TURad0F3WkFJd01YTWRGSjRCZXRMTFZZN09SdUU5bm9xYmJBWk9abi9hQXJYeVR3RkFaZktyUHp4RjJ2UG9KTmYxK1VDZGcxWEdBakJ3WDF6ZDlXR3FZa3FtTDVTRnF3MVF5U2pyMXpKZnBKTTkrMXJkRHdTUExNT1BPakt1aVhqb1UvcFVVZUc5UndtaFkzQmhaRmtObmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFQWllRSHlXaWIwdWRNMnV4VElxNTUvQW0rM1R0OGV2bWp3cU5EUEZNT3oyUDRtSnV5NGh6UVdZc1M1cEpCanRPTWpDUmMvbnl6NkJxRFlFWVh6NWtRNFNQSDA9PC9jMnBhOm1hbmlmZXN0PjwvbWV0YWRhdGE+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJtIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjQTlDOUU1Ii8+PHN0b3Agb2Zmc2V0PSIuNSIgc3RvcC1jb2xvcj0iIzVEODNBNyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzI0NDQ1RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjU2IiBmaWxsPSIjMDYxMzIxIiBzdHJva2U9InVybCgjbSkiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDQ0NUYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iMiA1Ii8+CiAgPCEtLSBHZW9tZXRyaWMgIkQiOiBlZGl0IHRoaXMgcGF0aCB0byBjaGFuZ2UgdGhlIGxldHRlcmZvcm0gLS0+CiAgPHBhdGggZD0iTTM4IDMyaDI0YzE4IDAgMjggMTIgMjggMjhTODAgODggNjIgODhIMzh6IE01MCA0NHYzMmgxMWM5IDAgMTUtNiAxNS0xNnMtNi0xNi0xNS0xNnoiIGZpbGw9InVybCgjbSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K",                        // or "assets/logo.svg"
+  banner: "assets/banner.jpg",
+  title: "ABOUT ME",
+  intro: "Short introduction about me.",
+  footerText: "© 2026 Damien.com. All rights reserved.",
+  about: {
+    enabled: true,
+    title: "ABOUT DAMIEN",
+    image: "images/aboutme1.png",
+    imagePosition: "center top",
+    paragraphs: [
+      "I’m Damien, a 25-year-old IT specialist skilled in troubleshooting, technical support, and problem-solving. I am dedicated to continuous learning and professional growth.",
+      "My interests include exploring new technologies, improving my technical skills, and solving IT-related challenges. My goal is to advance my career in information technology and contribute to innovative and effective solutions."
+    ],
+    details: [                           // label/value pairs; examples only
+      { label: "NAME", value: "Damien Christian Paul B. Ramos" },
+      { label: "INTERESTS", value: "Computers, Programming, Online games" },
+      { label: "LOCATION", value: "Bacolod City, Philippines" }
+    ]
+  }
+};
+const PARTICLE_CONFIG = {
+  enabled: true,
+  desktopCount: 65,
+  mobileCount: 22,
+  connectionDistance: 110,
+  particleSpeed: 0.25,
+  particleOpacity: 0.55,
+  lineOpacity: 0.18,
+  pointerInteraction: true
+};
+
+
+const SITE_CONFIG = { animations: true, showParticles: true };
+/* =====================  ENGINE (no edits needed)  ===================== */
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const animOn = SITE_CONFIG.animations && !reduced;
+
+/* Fills a container with an image; shows a styled placeholder if it fails to load. */
+function setImage(box, src, alt, pos) {
+  box.classList.add("img-slot");
+  if (pos) box.style.setProperty("--pos", pos);
+  if (!src) { box.classList.add("missing"); return; }
+  const img = new Image();
+  img.alt = alt || ""; img.loading = "lazy";
+  img.onerror = () => { img.remove(); box.classList.add("missing"); };
+  img.src = src;
+  box.appendChild(img);
+}
+
+function renderCard(c, extraBtnCls) {
+  const card = el("article", "card reveal" + (SITE_CONFIG.scanEffect ? "" : ""));
+  if (c.showImage !== false && c.image) {
+    const m = el("div"); setImage(m, c.image, c.title, c.imagePosition); card.appendChild(m);
+  }
+  const b = el("div", "card-body",
+    `<span class="card-label">${esc(c.label)}</span><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p>` +
+    `<a class="btn" href="${esc(c.href || "#")}">${esc(c.button)}</a>`);
+  card.appendChild(b);
+  return card;
+}
+
+
+document.title = "About | " + PAGE.siteName;
+document.documentElement.style.setProperty("--banner-image", `url("${PAGE.banner}")`);
+["brandLogo", "footLogo"].forEach(id => setImage($("#" + id), PAGE.logo, PAGE.siteName + " logo"));
+$("#brandName").textContent = $("#footName").textContent = PAGE.siteName;
+$("#pTitle").textContent = PAGE.title; $("#pIntro").textContent = PAGE.intro; $("#footText").textContent = PAGE.footerText;
+$("#homeLink").href = $("#backBtn").href = PAGE.homePage;
+const nav = $("#mainNav");
+[["HOME", PAGE.homePage + "#home"], ["ABOUT", "#"], ["PROJECTS", "projects.html"], ["GALLERY", "gallery.html"], ["CONTACT", "contact.html"]].forEach(([l, h]) => {
+  const a = el("a", "", l); a.href = h; if (l === "ABOUT") a.setAttribute("aria-current", "true"); nav.appendChild(a); });
+const btn = $("#menuBtn"); btn.onclick = () => btn.setAttribute("aria-expanded", nav.classList.toggle("open"));
+const A = PAGE.about, pic = el("div"); setImage(pic, A.image, A.heading, A.imagePosition);
+$("#aboutBox").append(pic, el("div", "", `<h3>${esc(A.heading)}</h3>` + A.paragraphs.map(t => `<p>${esc(t)}</p>`).join("") +
+  `<ul class="details">${A.details.map(d => `<li><b>${esc(d.label)}</b>${esc(d.value)}</li>`).join("")}</ul>`));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".reveal").forEach(r => animOn ? io.observe(r) : r.classList.add("in"));
+/* Particle background */
+function particles() {
+  const P = PARTICLE_CONFIG, cv = $("#particles");
+  if (!P.enabled || !SITE_CONFIG.showParticles) { cv.remove(); return; }
+  const ctx = cv.getContext("2d"); let W, H, pts = [], mouse = { x: -999, y: -999 }, raf, dpr = Math.min(devicePixelRatio || 1, 2);
+  const count = () => innerWidth < 768 ? P.mobileCount : P.desktopCount;
+  function init() {
+    W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pts = Array.from({ length: count() }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * P.particleSpeed * 2, vy: (Math.random() - .5) * P.particleSpeed * 2,
+      r: Math.random() * 1.4 + .6, t: Math.random() * 6.28
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of pts) {
+      p.x += p.vx; p.y += p.vy; p.t += .02;
+      if (P.pointerInteraction) { const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy); if (d < 120) { p.x += dx / d * .6; p.y += dy / d * .6; } }
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.fillStyle = `rgba(190,215,240,${P.particleOpacity * (.6 + .4 * Math.sin(p.t))})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+    }
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+      if (d < P.connectionDistance) {
+        ctx.strokeStyle = `rgba(93,131,167,${P.lineOpacity * (1 - d / P.connectionDistance)})`;
+        ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+      }
+    }
+    raf = requestAnimationFrame(draw);
+  }
+  init();
+  if (reduced || !SITE_CONFIG.animations) { draw(); cancelAnimationFrame(raf); return; } // one still frame
+  draw();
+  addEventListener("resize", init);
+  addEventListener("pointermove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  document.addEventListener("visibilitychange", () => { cancelAnimationFrame(raf); if (!document.hidden) draw(); });
+}
+
+
+particles();
+</script>
+</body>
+</html>
